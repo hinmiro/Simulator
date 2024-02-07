@@ -1,69 +1,71 @@
 package src.simu.model;
 
 import src.simu.framework.*;
-import src.eduni.distributions.Negexp;
-import src.eduni.distributions.Normal;
+import src.eduni.distributions.*;
 
-public class OmaMoottori extends Moottori{
-	
-	private Saapumisprosessi saapumisprosessi;
+public class OmaMoottori extends Moottori {
 
-	private Palvelupiste[] palvelupisteet;
+    private Saapumisprosessi saapumisprosessi;
 
-	public OmaMoottori(){
+    private Palvelupiste[] palvelupisteet;
 
-		palvelupisteet = new Palvelupiste[3];
+    public OmaMoottori() {
 
-		palvelupisteet[0]=new Palvelupiste(new Normal(10,6), tapahtumalista, TapahtumanTyyppi.DEP1);
-		palvelupisteet[1]=new Palvelupiste(new Normal(10,10), tapahtumalista, TapahtumanTyyppi.DEP2);
-		palvelupisteet[2]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP3);
+        palvelupisteet = new Palvelupiste[3];
 
-		saapumisprosessi = new Saapumisprosessi(new Negexp(15,5), tapahtumalista, TapahtumanTyyppi.ARR1);
+        palvelupisteet[0] = new Palvelupiste(new Normal(10, 6), tapahtumalista, TapahtumanTyyppi.DEP1);
+        palvelupisteet[1] = new Palvelupiste(new Normal(10, 10), tapahtumalista, TapahtumanTyyppi.DEP2);
+        palvelupisteet[2] = new Palvelupiste(new Normal(5, 3), tapahtumalista, TapahtumanTyyppi.DEP3);
 
-	}
+        saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR1);
+
+    }
 
 
-	@Override
-	protected void alustukset() {
-		saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
-	}
+    @Override
+    protected void alustukset() {
+        saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
+    }
 
-	@Override
-	protected void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
+    @Override
+    protected void suoritaTapahtuma(Tapahtuma t) {  // B-vaiheen tapahtumat
 
-		Asiakas a;
-		switch ((TapahtumanTyyppi)t.getTyyppi()){
+        Asiakas a;
+        switch ((TapahtumanTyyppi) t.getTyyppi()) {
 
-			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
-				       saapumisprosessi.generoiSeuraava();
-				break;
-			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
-				   	   palvelupisteet[1].lisaaJonoon(a);
-				break;
-			case DEP2: a = (Asiakas)palvelupisteet[1].otaJonosta();
-				   	   palvelupisteet[2].lisaaJonoon(a);
-				break;
-			case DEP3:
-				       a = (Asiakas)palvelupisteet[2].otaJonosta();
-					   a.setPoistumisaika(Kello.getInstance().getAika());
-			           a.raportti();
-		}
-	}
+            case ARR1:
+                palvelupisteet[0].lisaaJonoon(new Asiakas());
+                saapumisprosessi.generoiSeuraava();
+                break;
+            case DEP1:
+                a = (Asiakas) palvelupisteet[0].otaJonosta();
+                palvelupisteet[1].lisaaJonoon(a);
+                break;
+            case DEP2:
+                a = (Asiakas) palvelupisteet[1].otaJonosta();
+                palvelupisteet[2].lisaaJonoon(a);
+                break;
+            case DEP3:
+                a = (Asiakas) palvelupisteet[2].otaJonosta();
+                a.setPoistumisaika(Kello.getInstance().getAika());
+                a.raportti();
+        }
+    }
 
-	@Override
-	protected void yritaCTapahtumat(){
-		for (Palvelupiste p: palvelupisteet){
-			if (!p.onVarattu() && p.onJonossa()){
-				p.aloitaPalvelu();
-			}
-		}
-	}
+    @Override
+    protected void yritaCTapahtumat() {
+        for (Palvelupiste p : palvelupisteet) {
+            if (!p.onVarattu() && p.onJonossa()) {
+                p.aloitaPalvelu();
+            }
+        }
+    }
 
-	@Override
-	protected void tulokset() {
-		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
-		System.out.println("Tulokset ... puuttuvat vielä");
-	}
+    @Override
+    protected void tulokset() {
+        System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
+        System.out.println("Tulokset ... puuttuvat vielä");
+    }
 
-	
+
 }
