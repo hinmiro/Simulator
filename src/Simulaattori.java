@@ -18,3 +18,5 @@ public class Simulaattori { //Tekstipohjainen
 }
 
 //Testi
+///aaa
+//aaàā
