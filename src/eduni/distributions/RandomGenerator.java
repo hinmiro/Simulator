@@ -1,4 +1,4 @@
-package src.distributions;
+package src.eduni.distributions;
 
 /**
  * A random number generator producing pseudorandom numbers based
