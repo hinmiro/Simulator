@@ -2,7 +2,8 @@ package src.simu.model;
 
 import src.simu.framework.*;
 import src.eduni.distributions.Negexp;
-import src.eduni.distributions.Normal;
+import src.eduni.distributions.*;
+
 
 public class OmaMoottori extends Moottori{
 	
