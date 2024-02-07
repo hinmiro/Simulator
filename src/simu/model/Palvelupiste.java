@@ -1,8 +1,8 @@
 package src.simu.model;
 
-import simu.framework.*;
+import src.simu.framework.*;
 import java.util.LinkedList;
-import src.distributions.ContinuousGenerator;
+import src.eduni.distributions.ContinuousGenerator;
 
 // TODO:
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava

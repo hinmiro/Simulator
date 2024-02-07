@@ -1,4 +1,4 @@
-package src.distributions;
+package src.eduni.distributions;
 
 /**
  * A generic Generator class which delegates its Seedable ability to a <code>Distributions</code> object.

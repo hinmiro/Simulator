@@ -1,4 +1,4 @@
-package src.distributions;
+package src.eduni.distributions;
 
 /**
  * offers several discrete and continuous distributions all seeded by a common

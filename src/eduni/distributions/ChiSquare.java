@@ -1,4 +1,4 @@
-package src.distributions;
+package src.eduni.distributions;
 
 /**
  * A random number generator based on the Chi-Square distribution.
