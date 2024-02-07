@@ -1,6 +1,6 @@
 package src.simu.model;
 
-import simu.framework.*;
+import src.simu.framework.*;
 import src.distributions.Negexp;
 import src.distributions.Normal;
 
