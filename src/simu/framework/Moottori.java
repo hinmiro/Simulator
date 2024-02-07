@@ -53,7 +53,7 @@ public abstract class Moottori {
 	}
 	
 	private boolean simuloidaan(){
-		return false;
+		return kello.getAika() < simulointiaika;
 	}
 
 	protected abstract void suoritaTapahtuma(Tapahtuma t);  // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
