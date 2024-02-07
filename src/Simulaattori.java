@@ -5,7 +5,7 @@ import src.simu.framework.Trace;
 import src.simu.framework.Trace.Level;
 import src.simu.model.OmaMoottori;
 
-public class Simulaattori { //Tekstipohjainen
+public class Simulaattori { //Text based simulation
 
 	public static void main(String[] args) {
 		
