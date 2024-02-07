@@ -1,5 +1,5 @@
 package src.simu.framework;
-import eduni.distributions.*;
+import src.eduni.distributions.*;
 
 public class Saapumisprosessi {
 	
