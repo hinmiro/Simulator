@@ -1,4 +1,4 @@
-package src.distributions;
+package src.eduni.distributions;
 
 /** A continuous generator provides a long value according to the distribution it relies on.
  */
