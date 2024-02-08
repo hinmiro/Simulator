@@ -18,3 +18,5 @@ public class Simulaattori { //Text based simulation
 }
 
 //Testi
+///aaa
+//aaàā
