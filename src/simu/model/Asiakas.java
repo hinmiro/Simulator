@@ -10,6 +10,10 @@ public class Asiakas {
 	private int id;
 	private static int i = 1;
 	private static long sum = 0;
+	private static double totalTime = 0;
+	private static int totalCustomers = 0;
+
+
 	
 	public Asiakas(){
 	    id = i++;
@@ -24,6 +28,8 @@ public class Asiakas {
 
 	public void setPoistumisaika(double poistumisaika) {
 		this.poistumisaika = poistumisaika;
+		totalTime += (poistumisaika - saapumisaika);
+		totalCustomers++;
 	}
 
 	public double getSaapumisaika() {
@@ -50,4 +56,11 @@ public class Asiakas {
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
 	}
 
+	public static double getAverageTimeSpent(){
+		if (totalCustomers == 0){
+			return 0;
+		}else {
+			return totalTime / totalCustomers;
+		}
+	}
 }

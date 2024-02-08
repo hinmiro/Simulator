@@ -64,7 +64,7 @@ public class OmaMoottori extends Moottori {
     @Override
     protected void tulokset() {
         System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
-        System.out.println("Tulokset ... puuttuvat vielä");
+        System.out.println("Keskimääräinen läpikulku aika on:  " + Asiakas.getAverageTimeSpent());
     }
 
 
