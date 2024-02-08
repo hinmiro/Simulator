@@ -3,6 +3,8 @@ package src.simu.model;
 import src.simu.framework.*;
 import src.eduni.distributions.*;
 
+import java.util.Random;
+
 public class OmaMoottori extends Moottori {
 
     private Saapumisprosessi saapumisprosessi;
@@ -74,5 +76,9 @@ public class OmaMoottori extends Moottori {
         System.out.println("Keskimääräinen asiakastyytyväisyys: " + Asiakas.getHappyRating());
     }
 
-
+    protected boolean generateTrueFalse(){
+        Random random = new Random();
+        double normalNum = new Normal(5, random.nextInt(10)+1).sample();
+        return normalNum <= 2 || normalNum >= 8;
+    }
 }

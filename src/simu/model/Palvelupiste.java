@@ -2,13 +2,15 @@ package src.simu.model;
 
 import src.simu.framework.*;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
+
 import src.eduni.distributions.ContinuousGenerator;
 
 // TODO:
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava
 public class Palvelupiste {
 
-	private final LinkedList<Asiakas> jono = new LinkedList<>(); // Tietorakennetoteutus
+	private final PriorityQueue<Asiakas> jono = new PriorityQueue<>(); // Tietorakennetoteutus
 	private final ContinuousGenerator generator;
 	private final Tapahtumalista tapahtumalista;
 	private final TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
@@ -25,15 +27,12 @@ public class Palvelupiste {
 				
 	}
 
-
+	//Asiakas(boolean varattuAika)
 	public void lisaaJonoon(Asiakas a){   // Jonon 1. asiakas aina palvelussa
 		jono.add(a);
-		
 	}
 
-
 	public Asiakas otaJonosta(){  // Poistetaan palvelussa ollut
-		varattu = false;
 		return jono.poll();
 	}
 
@@ -56,7 +55,7 @@ public class Palvelupiste {
 
 
 	public boolean onJonossa(){
-		return jono.size() != 0;
+		return !jono.isEmpty();
 	}
 
 }
