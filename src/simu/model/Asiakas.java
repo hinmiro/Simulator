@@ -12,6 +12,7 @@ public class Asiakas {
 	private static long sum = 0;
 	private static double totalTime = 0;
 	private static int totalCustomers = 0;
+	private static double happyRating = 0;
 
 
 	
@@ -53,7 +54,22 @@ public class Asiakas {
 		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " viipyi: " +(poistumisaika-saapumisaika));
 		sum += (poistumisaika-saapumisaika);
 		double keskiarvo = sum/id;
+		int customerRating = calculateHappyRating(poistumisaika - saapumisaika);
+		happyRating += customerRating;
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
+	}
+	private int calculateHappyRating(double timeSpent) {
+		if (timeSpent < 40) {
+			return 5;
+		} else if (timeSpent < 45) {
+			return 4;
+		} else if (timeSpent < 50) {
+			return 3;
+		} else if (timeSpent < 55) {
+			return 2;
+		} else {
+			return 1;
+		}
 	}
 
 	public static double getAverageTimeSpent(){
@@ -65,5 +81,9 @@ public class Asiakas {
 	}
 	public static int getTotalCustomers(){
 		return totalCustomers;
+	}
+
+	public static double getHappyRating(){
+		return happyRating / totalCustomers;
 	}
 }

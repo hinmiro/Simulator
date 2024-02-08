@@ -71,6 +71,7 @@ public class OmaMoottori extends Moottori {
         System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
         System.out.println("Keskimääräinen läpikulku aika on:  " + Asiakas.getAverageTimeSpent());
         System.out.println("Asiakkaita palveltu: " + Asiakas.getTotalCustomers());
+        System.out.println("Keskimääräinen asiakastyytyväisyys: " + Asiakas.getHappyRating());
     }
 
 
