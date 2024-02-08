@@ -49,6 +49,11 @@ public class OmaMoottori extends Moottori {
                 a = (Asiakas) palvelupisteet[2].otaJonosta();
                 a.setPoistumisaika(Kello.getInstance().getAika());
                 a.raportti();
+                break;
+            case SIJOITUS_PALVELUT:
+                a = (Asiakas)palvelupisteet[3].otaJonosta();
+                a.setPoistumisaika(Kello.getInstance().getAika());
+                a.raportti();
         }
     }
 
