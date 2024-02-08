@@ -17,7 +17,7 @@ public class OmaMoottori extends Moottori {
         palvelupisteet[1] = new Palvelupiste(new Normal(10, 10), tapahtumalista, TapahtumanTyyppi.UUDEN_TILIN_AVAUS);
         palvelupisteet[2] = new Palvelupiste(new Normal(5, 3), tapahtumalista, TapahtumanTyyppi.TALLETUS);
         palvelupisteet[3] = new Palvelupiste(new Normal(6, 9), tapahtumalista, TapahtumanTyyppi.SIJOITUS_PALVELUT);
-        saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR1);
+        saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.SAAPUMINEN);
 
     }
 
@@ -33,7 +33,7 @@ public class OmaMoottori extends Moottori {
         Asiakas a;
         switch ((TapahtumanTyyppi) t.getTyyppi()) {
 
-            case ARR1:
+            case SAAPUMINEN:
                 palvelupisteet[0].lisaaJonoon(new Asiakas());
                 saapumisprosessi.generoiSeuraava();
                 break;
