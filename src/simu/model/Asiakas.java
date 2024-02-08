@@ -10,10 +10,10 @@ public class Asiakas {
 	private int id;
 	private static int i = 1;
 	private static long sum = 0;
-	
-	public Asiakas(){
+	private boolean onVarattu;
+	public Asiakas(boolean onVarattu){
 	    id = i++;
-	    
+	    this.onVarattu = onVarattu;
 		saapumisaika = Kello.getInstance().getAika();
 		Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
 	}
@@ -33,8 +33,10 @@ public class Asiakas {
 	public void setSaapumisaika(double saapumisaika) {
 		this.saapumisaika = saapumisaika;
 	}
-	
 
+	public boolean isOnVarattu() {
+		return onVarattu;
+	}
 
 	public int getId() {
 		return id;
@@ -50,4 +52,10 @@ public class Asiakas {
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
 	}
 
+	@Override
+	public int compareTo(Asiakas a) {
+		if (a.isOnVarattu()) return 1;
+		else if (a.isOnVarattu())
+		return 0;
+	}
 }

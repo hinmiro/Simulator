@@ -3,6 +3,8 @@ package src.simu.model;
 import src.simu.framework.*;
 import src.eduni.distributions.*;
 
+import java.util.Random;
+
 public class OmaMoottori extends Moottori {
 
     private Saapumisprosessi saapumisprosessi;
@@ -34,7 +36,7 @@ public class OmaMoottori extends Moottori {
         switch ((TapahtumanTyyppi) t.getTyyppi()) {
 
             case ARR1:
-                palvelupisteet[0].lisaaJonoon(new Asiakas());
+                palvelupisteet[0].lisaaJonoon(new Asiakas(generateTrueFalse()));
                 saapumisprosessi.generoiSeuraava();
                 break;
             case INFOTISKI:
@@ -49,6 +51,8 @@ public class OmaMoottori extends Moottori {
                 a = (Asiakas) palvelupisteet[2].otaJonosta();
                 a.setPoistumisaika(Kello.getInstance().getAika());
                 a.raportti();
+            case SIJOITUS_PALVELUT:
+
         }
     }
 
@@ -67,5 +71,9 @@ public class OmaMoottori extends Moottori {
         System.out.println("Tulokset ... puuttuvat vielä");
     }
 
-
+    protected boolean generateTrueFalse(){
+        Random random = new Random();
+        double normalNum = new Normal(5, random.nextInt(10)+1).sample();
+        return normalNum <= 2 || normalNum >= 8;
+    }
 }
