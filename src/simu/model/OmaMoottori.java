@@ -36,7 +36,11 @@ public class OmaMoottori extends Moottori {
         switch ((TapahtumanTyyppi) t.getTyyppi()) {
 
             case SAAPUMINEN:
-                palvelupisteet[0].lisaaJonoon(new Asiakas(generateTrueFalse()));
+                Asiakas as =  new Asiakas(generateTrueFalse());
+                if (as.isOnVarattu())
+                    palvelupisteet[1].lisaaJonoon(as);
+                else
+                    palvelupisteet[0].lisaaJonoon(as);
                 saapumisprosessi.generoiSeuraava();
                 break;
             case INFOTISKI:
@@ -44,16 +48,32 @@ public class OmaMoottori extends Moottori {
                 palvelupisteet[1].lisaaJonoon(a);
                 break;
             case UUDEN_TILIN_AVAUS:
-                a = (Asiakas) palvelupisteet[1].otaJonosta();
-                palvelupisteet[2].lisaaJonoon(a);
+                if (palvelupisteet[1].onVarattuJonossa()){
+                    a = (Asiakas) palvelupisteet[1].otaVarattuJonosta();
+                    palvelupisteet[2].lisaaJonoon(a);
+                }
+                else {
+                    a = (Asiakas) palvelupisteet[1].otaJonosta();
+                    palvelupisteet[2].lisaaJonoon(a);
+                }
                 break;
             case TALLETUS:
-                a = (Asiakas) palvelupisteet[2].otaJonosta();
-                a.setPoistumisaika(Kello.getInstance().getAika());
-                a.raportti();
+                if (palvelupisteet[2].onVarattuJonossa()){
+                    a = (Asiakas) palvelupisteet[2].otaVarattuJonosta();
+                    palvelupisteet[3].lisaaJonoon(a);
+                }
+                else {
+                    a = (Asiakas) palvelupisteet[2].otaJonosta();
+                    palvelupisteet[3].lisaaJonoon(a);
+                }
                 break;
             case SIJOITUS_PALVELUT:
-                a = (Asiakas)palvelupisteet[3].otaJonosta();
+                if (palvelupisteet[3].onVarattuJonossa()){
+                    a = (Asiakas) palvelupisteet[3].otaVarattuJonosta();
+                }
+                else {
+                    a = (Asiakas) palvelupisteet[3].otaJonosta();
+                }
                 a.setPoistumisaika(Kello.getInstance().getAika());
                 a.raportti();
         }
