@@ -63,4 +63,7 @@ public class Asiakas {
 			return totalTime / totalCustomers;
 		}
 	}
+	public static int getTotalCustomers(){
+		return totalCustomers;
+	}
 }
