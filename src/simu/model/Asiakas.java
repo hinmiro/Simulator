@@ -4,24 +4,25 @@ import src.simu.framework.*;
 
 // TODO:
 // Asiakas koodataan simulointimallin edellyttämällä tavalla (data!)
-public class Asiakas {
-    private double saapumisaika;
-    private double poistumisaika;
-    private int id;
-    private static int i = 1;
-    private static long sum = 0;
-    private static double totalTime = 0;
-    private static int totalCustomers = 0;
-    private static double happyRating = 0;
+public class Asiakas implements Comparable<Asiakas>{
+	private double saapumisaika;
+	private double poistumisaika;
+	private int id;
+	private static int i = 1;
+	private static long sum = 0;
+	private static double totalTime = 0;
+	private static int totalCustomers = 0;
+	private static double happyRating = 0;
     private boolean onVarattu;
 
 
-    public Asiakas(boolean onVarattu) {
-        id = i++;
-        this.onVarattu = onVarattu;
-        saapumisaika = Kello.getInstance().getAika();
-        Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo " + saapumisaika);
-    }
+
+	public Asiakas(boolean onVarattu){
+	    id = i++;
+	    this.onVarattu = onVarattu;
+		saapumisaika = Kello.getInstance().getAika();
+		Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
+	}
 
     public double getPoistumisaika() {
         return poistumisaika;
@@ -37,9 +38,10 @@ public class Asiakas {
         return saapumisaika;
     }
 
-    public void setSaapumisaika(double saapumisaika) {
-        this.saapumisaika = saapumisaika;
-    }
+	public void setSaapumisaika(double saapumisaika) {
+		this.saapumisaika = saapumisaika;
+	}
+
 
 
     public boolean isOnVarattu() {
@@ -76,26 +78,25 @@ public class Asiakas {
         }
     }
 
+	public static double getAverageTimeSpent(){
+		if (totalCustomers == 0){
+			return 0;
+		}else {
+			return totalTime / totalCustomers;
+		}
+	}
+	public static int getTotalCustomers(){
+		return totalCustomers;
+	}
+
+	public static double getHappyRating(){
+		return happyRating / totalCustomers;
+	}
+
     @Override
     public int compareTo(Asiakas a) {
         if (a.isOnVarattu()) return 1;
         else if (a.isOnVarattu())
             return 0;
-    }
-
-    public static double getAverageTimeSpent() {
-        if (totalCustomers == 0) {
-            return 0;
-        } else {
-            return totalTime / totalCustomers;
-        }
-    }
-
-    public static int getTotalCustomers() {
-        return totalCustomers;
-    }
-
-    public static double getHappyRating() {
-        return happyRating / totalCustomers;
     }
 }

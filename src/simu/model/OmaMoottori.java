@@ -36,7 +36,7 @@ public class OmaMoottori extends Moottori {
         switch ((TapahtumanTyyppi) t.getTyyppi()) {
 
             case SAAPUMINEN:
-                palvelupisteet[0].lisaaJonoon(new Asiakas());
+                palvelupisteet[0].lisaaJonoon(new Asiakas(generateTrueFalse()));
                 saapumisprosessi.generoiSeuraava();
                 break;
             case INFOTISKI:
