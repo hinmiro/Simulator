@@ -17,11 +17,11 @@ public class Asiakas implements Comparable<Asiakas>{
 
 
 
-	public Asiakas(boolean onVarattu){
-	    id = i++;
-	    this.onVarattu = onVarattu;
-		saapumisaika = Kello.getInstance().getAika();
-		Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
+	public Asiakas(boolean onVarattu) {
+        id = i++;
+        this.onVarattu = onVarattu;
+        saapumisaika = Kello.getInstance().getAika();
+        Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
 	}
 
     public double getPoistumisaika() {
@@ -95,8 +95,17 @@ public class Asiakas implements Comparable<Asiakas>{
 
     @Override
     public int compareTo(Asiakas a) {
-        if (a.isOnVarattu()) return 1;
-        else if (a.isOnVarattu())
-            return 0;
+		// If 'this' is reserved and 'a' is not reserved, 'this' should have higher priority
+		if (this.isOnVarattu() && !a.isOnVarattu()) {
+			return -1;
+		}
+		// If 'a' is reserved and 'this' is not reserved, 'a' should have higher priority
+		else if (!this.isOnVarattu() && a.isOnVarattu()) {
+			return 1;
+		}
+		// If both 'this' and 'a' have the same reservation status, their order remains unchanged
+		else {
+			return 0;
+		}
     }
 }
