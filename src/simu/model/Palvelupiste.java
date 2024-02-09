@@ -3,7 +3,6 @@ package src.simu.model;
 import src.simu.framework.*;
 
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 
 import src.eduni.distributions.ContinuousGenerator;
 

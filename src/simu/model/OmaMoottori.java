@@ -55,7 +55,7 @@ public class OmaMoottori extends Moottori {
                     } else {
                         if (palvelupisteet[2].onJonossa()) {
                             palvelupisteet[2].lisaaJononSeuraavaksi(a);
-                        }else {
+                        } else {
                             palvelupisteet[2].lisaaJonoon(a);
                         }
                     }
