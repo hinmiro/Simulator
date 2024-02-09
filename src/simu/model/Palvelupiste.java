@@ -31,13 +31,19 @@ public class Palvelupiste {
 
     //Asiakas(boolean varattuAika)
     public void lisaaJonoon(Asiakas a) {   // Jonon 1. asiakas aina palvelussa
-        if (a.isOnVarattu())
-            varattuJono.add(a);
-        else jono.add(a);
+        jono.add(a);
     }
 
     public Asiakas otaJonosta() {  // Poistetaan palvelussa ollut
         return jono.poll();
+    }
+
+    public void lisaaVarattuJonoon(Asiakas a) {
+        varattuJono.add(a);
+    }
+
+    public void lisaaJononSeuraavaksi(Asiakas a) {
+        jono.add(1, a);
     }
 
     public Asiakas otaVarattuJonosta() {
@@ -47,7 +53,7 @@ public class Palvelupiste {
 
     public void aloitaPalvelu() {  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
 
-        Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + jono.peek().getId() + " reservation: " + jono.peek().isOnVarattu());
+        Trace.out(Trace.Level.INFO, "Aloitetaan uusi "+ skeduloitavanTapahtumanTyyppi +" asiakkaalle " + jono.peek().getId() + " reservation: " + jono.peek().isOnVarattu());
 
         varattu = true;
         double palveluaika = generator.sample();
@@ -63,6 +69,7 @@ public class Palvelupiste {
     public boolean onJonossa() {
         return !jono.isEmpty();
     }
+
     public boolean onVarattuJonossa() {
         return !varattuJono.isEmpty();
     }

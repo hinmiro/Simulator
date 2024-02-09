@@ -36,48 +36,65 @@ public class OmaMoottori extends Moottori {
         switch ((TapahtumanTyyppi) t.getTyyppi()) {
 
             case SAAPUMINEN:
-                Asiakas as =  new Asiakas(generateTrueFalse());
+                Asiakas as = new Asiakas(generateTrueFalse());
                 if (as.isOnVarattu())
-                    palvelupisteet[1].lisaaJonoon(as);
+                    palvelupisteet[1].lisaaVarattuJonoon(as);
                 else
                     palvelupisteet[0].lisaaJonoon(as);
                 saapumisprosessi.generoiSeuraava();
                 break;
-            case INFOTISKI:
+            case INFOTISKI: // 0
                 a = (Asiakas) palvelupisteet[0].otaJonosta();
                 palvelupisteet[1].lisaaJonoon(a);
                 break;
-            case UUDEN_TILIN_AVAUS:
-                if (palvelupisteet[1].onVarattuJonossa()){
+            case UUDEN_TILIN_AVAUS: // 1
+                if (palvelupisteet[1].onVarattuJonossa()) {
                     a = (Asiakas) palvelupisteet[1].otaVarattuJonosta();
-                    palvelupisteet[2].lisaaJonoon(a);
-                }
-                else {
+                    if (!palvelupisteet[1].onVarattu()) {
+                        palvelupisteet[2].lisaaJonoon(a);
+                    } else {
+                        if (palvelupisteet[2].onJonossa()) {
+                            palvelupisteet[2].lisaaJononSeuraavaksi(a);
+                        }else {
+                            palvelupisteet[2].lisaaJonoon(a);
+                        }
+                    }
+                } else {
                     a = (Asiakas) palvelupisteet[1].otaJonosta();
                     palvelupisteet[2].lisaaJonoon(a);
                 }
                 break;
-            case TALLETUS:
-                if (palvelupisteet[2].onVarattuJonossa()){
+            case TALLETUS:  // 2
+                if (palvelupisteet[2].onVarattuJonossa()) {
                     a = (Asiakas) palvelupisteet[2].otaVarattuJonosta();
-                    palvelupisteet[3].lisaaJonoon(a);
-                }
-                else {
+                    if (!palvelupisteet[2].onVarattu()) {
+                        palvelupisteet[3].lisaaJonoon(a);
+                    } else {
+                        if (palvelupisteet[3].onJonossa()) {
+                            palvelupisteet[3].lisaaJononSeuraavaksi(a);
+                        } else {
+                            palvelupisteet[3].lisaaJonoon(a);
+                        }
+                    }
+                } else {
                     a = (Asiakas) palvelupisteet[2].otaJonosta();
                     palvelupisteet[3].lisaaJonoon(a);
                 }
                 break;
-            case SIJOITUS_PALVELUT:
-                if (palvelupisteet[3].onVarattuJonossa()){
+            case SIJOITUS_PALVELUT: // 3
+                if (palvelupisteet[3].onVarattuJonossa()) {
                     a = (Asiakas) palvelupisteet[3].otaVarattuJonosta();
+                    if (!palvelupisteet[3].onVarattu()) {
+                        palvelupisteet[3].otaJonosta();
+                    } else {
+                        a = (Asiakas) palvelupisteet[3].otaJonosta();
+                    }
+                    a.setPoistumisaika(Kello.getInstance().getAika());
+                    a.raportti();
                 }
-                else {
-                    a = (Asiakas) palvelupisteet[3].otaJonosta();
-                }
-                a.setPoistumisaika(Kello.getInstance().getAika());
-                a.raportti();
         }
     }
+
 
     @Override
     protected void yritaCTapahtumat() {
@@ -91,14 +108,16 @@ public class OmaMoottori extends Moottori {
     @Override
     protected void tulokset() {
         System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
+        System.out.println("---------------------------------------------------------");
         System.out.println("Keskimääräinen läpikulku aika on:  " + Asiakas.getAverageTimeSpent());
         System.out.println("Asiakkaita palveltu: " + Asiakas.getTotalCustomers());
         System.out.println("Keskimääräinen asiakastyytyväisyys: " + Asiakas.getHappyRating());
     }
 
-    protected boolean generateTrueFalse(){
+    protected boolean generateTrueFalse() {
         Random random = new Random();
-        double normalNum = new Normal(5, random.nextInt(10)+1).sample();
+        double normalNum = new Normal(5, random.nextInt(10) + 1).sample();
         return normalNum <= 2 || normalNum >= 8;
     }
 }
+
