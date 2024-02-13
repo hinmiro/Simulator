@@ -97,7 +97,6 @@ public class OmaMoottori extends Moottori {
         }
     }
 
-
     @Override
     protected void yritaCTapahtumat() {
         for (Palvelupiste p : palvelupisteet) {
