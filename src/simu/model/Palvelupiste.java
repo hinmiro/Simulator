@@ -68,7 +68,7 @@ public class Palvelupiste {
 
 
     public boolean onJonossa() {
-        return jono.isEmpty();
+        return !jono.isEmpty();
     }
 
     public boolean onVarattuJonossa() {
