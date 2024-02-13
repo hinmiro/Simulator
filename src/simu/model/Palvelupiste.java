@@ -34,6 +34,7 @@ public class Palvelupiste {
     }
 
     public Asiakas otaJonosta() {  // Poistetaan palvelussa ollut
+        varattu = false;
         return jono.poll();
     }
 
@@ -46,6 +47,7 @@ public class Palvelupiste {
     }
 
     public Asiakas otaVarattuJonosta() {
+        varattu = false;
         return varattuJono.poll();
     }
 

@@ -23,7 +23,6 @@ public class OmaMoottori extends Moottori {
 
     }
 
-
     @Override
     protected void alustukset() {
         saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
@@ -45,6 +44,7 @@ public class OmaMoottori extends Moottori {
                 break;
             case INFOTISKI: // 0
                 a = (Asiakas) palvelupisteet[0].otaJonosta();
+                System.out.println("##########000");
                 palvelupisteet[1].lisaaJonoon(a);
                 break;
             case UUDEN_TILIN_AVAUS: // 1
