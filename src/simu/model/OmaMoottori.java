@@ -49,6 +49,7 @@ public class OmaMoottori extends Moottori {
                 break;
             case UUDEN_TILIN_AVAUS: // 1
                 if (palvelupisteet[1].onVarattuJonossa()) {
+                    System.out.println("############################3");
                     a = (Asiakas) palvelupisteet[1].otaVarattuJonosta();
                     if (!palvelupisteet[1].onVarattu()) {
                         palvelupisteet[2].lisaaJonoon(a);
@@ -79,19 +80,21 @@ public class OmaMoottori extends Moottori {
                 } else {
                     a = (Asiakas) palvelupisteet[2].otaJonosta();
                     palvelupisteet[3].lisaaJonoon(a);
+
                 }
                 break;
             case SIJOITUS_PALVELUT: // 3
                 if (palvelupisteet[3].onVarattuJonossa()) {
                     a = (Asiakas) palvelupisteet[3].otaVarattuJonosta();
-                    if (!palvelupisteet[3].onVarattu()) {
-                        palvelupisteet[3].otaJonosta();
-                    } else {
-                        a = (Asiakas) palvelupisteet[3].otaJonosta();
-                    }
+                    a.setPoistumisaika(Kello.getInstance().getAika());
+                    a.raportti();
+
+                } else {
+                    a = (Asiakas) palvelupisteet[3].otaJonosta();
                     a.setPoistumisaika(Kello.getInstance().getAika());
                     a.raportti();
                 }
+                break;
         }
     }
 
