@@ -17,9 +17,9 @@ public class Asiakas{
 
 
 
-	public Asiakas(boolean onVarattu) {
+	public Asiakas() {
         id = i++;
-        this.onVarattu = onVarattu;
+   //     this.onVarattu = onVarattu;
         saapumisaika = Kello.getInstance().getAika();
         Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
 	}

@@ -36,11 +36,8 @@ public class OmaMoottori extends Moottori {
         switch ((TapahtumanTyyppi) t.getTyyppi()) {
 
             case SAAPUMINEN:
-                Asiakas as = new Asiakas(generateTrueFalse());
-                if (as.isOnVarattu())
-                    palvelupisteet[1].lisaaVarattuJonoon(as);
-                else
-                    palvelupisteet[0].lisaaJonoon(as);
+                Asiakas as = new Asiakas();
+                palvelupisteet[0].lisaaJonoon(as);
                 saapumisprosessi.generoiSeuraava();
                 break;
             case INFOTISKI: // 0
@@ -48,52 +45,17 @@ public class OmaMoottori extends Moottori {
                 palvelupisteet[1].lisaaJonoon(a);
                 break;
             case UUDEN_TILIN_AVAUS: // 1
-                if (palvelupisteet[1].onVarattuJonossa()) {
-                    System.out.println("############################3");
-                    a = (Asiakas) palvelupisteet[1].otaVarattuJonosta();
-                    if (!palvelupisteet[1].onVarattu()) {
-                        palvelupisteet[2].lisaaJonoon(a);
-                    } else {
-                        if (palvelupisteet[2].onJonossa()) {
-                            palvelupisteet[2].lisaaJononSeuraavaksi(a);
-                        } else {
-                            palvelupisteet[2].lisaaJonoon(a);
-                        }
-                    }
-                } else {
-                    a = (Asiakas) palvelupisteet[1].otaJonosta();
-                    palvelupisteet[2].lisaaJonoon(a);
-                }
+                a = (Asiakas) palvelupisteet[1].otaJonosta();
+                palvelupisteet[2].lisaaJonoon(a);
                 break;
             case TALLETUS:  // 2
-                if (palvelupisteet[2].onVarattuJonossa()) {
-                    a = (Asiakas) palvelupisteet[2].otaVarattuJonosta();
-                    if (!palvelupisteet[2].onVarattu()) {
-                        palvelupisteet[3].lisaaJonoon(a);
-                    } else {
-                        if (palvelupisteet[3].onJonossa()) {
-                            palvelupisteet[3].lisaaJononSeuraavaksi(a);
-                        } else {
-                            palvelupisteet[3].lisaaJonoon(a);
-                        }
-                    }
-                } else {
-                    a = (Asiakas) palvelupisteet[2].otaJonosta();
-                    palvelupisteet[3].lisaaJonoon(a);
-
-                }
+                a = (Asiakas) palvelupisteet[2].otaJonosta();
+                palvelupisteet[3].lisaaJonoon(a);
                 break;
             case SIJOITUS_PALVELUT: // 3
-                if (palvelupisteet[3].onVarattuJonossa()) {
-                    a = (Asiakas) palvelupisteet[3].otaVarattuJonosta();
-                    a.setPoistumisaika(Kello.getInstance().getAika());
-                    a.raportti();
-
-                } else {
-                    a = (Asiakas) palvelupisteet[3].otaJonosta();
-                    a.setPoistumisaika(Kello.getInstance().getAika());
-                    a.raportti();
-                }
+                a = (Asiakas) palvelupisteet[3].otaJonosta();
+                a.setPoistumisaika(Kello.getInstance().getAika());
+                a.raportti();
                 break;
         }
     }
@@ -102,7 +64,8 @@ public class OmaMoottori extends Moottori {
     @Override
     protected void yritaCTapahtumat() {
         for (Palvelupiste p : palvelupisteet) {
-            if (!p.onVarattu() && p.onJonossa()) {
+            if (!p.onVarattu() && !p.onJonossa()) {
+                System.out.println("#########");
                 p.aloitaPalvelu();
             }
         }
