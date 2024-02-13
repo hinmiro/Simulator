@@ -53,8 +53,10 @@ public class OmaMoottori extends Moottori {
                 a = (Asiakas)palvelupisteet[3].otaJonosta();
                 a.setPoistumisaika(Kello.getInstance().getAika());
                 a.raportti();
+                break;
         }
     }
+
 
     @Override
     protected void yritaCTapahtumat() {
@@ -72,6 +74,5 @@ public class OmaMoottori extends Moottori {
         System.out.println("Asiakkaita palveltu: " + Asiakas.getTotalCustomers());
         System.out.println("Keskimääräinen asiakastyytyväisyys: " + Asiakas.getHappyRating());
     }
-
 
 }
