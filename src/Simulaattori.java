@@ -8,15 +8,10 @@ import src.simu.model.OmaMoottori;
 public class Simulaattori { //Text based simulation
 
 	public static void main(String[] args) {
-		
+
 		Trace.setTraceLevel(Level.INFO);
 		Moottori m = new OmaMoottori();
 		m.setSimulointiaika(1000);
 		m.aja();
-		///
 	}
 }
-
-//Testi
-///aaa
-//aaàā
